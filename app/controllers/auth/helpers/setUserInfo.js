@@ -7,6 +7,8 @@ const setUserInfo = (req = {}) => {
     let user = {
       _id: req._id,
       name: req.name,
+      username: req.username,
+      rut: req.rut,
       email: req.email,
       role: req.role,
       verified: req.verified

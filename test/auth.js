@@ -26,7 +26,7 @@ describe('*********** AUTH ***********', () => {
     it('it should GET home API url', (done) => {
       chai
         .request(server)
-        .get('/')
+        .get('/api/v1')
         .end((err, res) => {
           res.should.have.status(200)
           done()
@@ -51,7 +51,7 @@ describe('*********** AUTH ***********', () => {
     it('it should GET token', (done) => {
       chai
         .request(server)
-        .post('/login')
+        .post('/api/v1/login')
         .send(loginDetails)
         .end((err, res) => {
           res.should.have.status(200)
@@ -67,12 +67,14 @@ describe('*********** AUTH ***********', () => {
     it('it should POST register', (done) => {
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email,
         password: faker.random.words()
       }
       chai
         .request(server)
-        .post('/register')
+        .post('/api/v1/register')
         .send(user)
         .end((err, res) => {
           res.should.have.status(201)
@@ -86,12 +88,14 @@ describe('*********** AUTH ***********', () => {
     it('it should NOT POST a register if email already exists', (done) => {
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email,
         password: faker.random.words()
       }
       chai
         .request(server)
-        .post('/register')
+        .post('/api/v1/register')
         .send(user)
         .end((err, res) => {
           res.should.have.status(422)
@@ -106,7 +110,7 @@ describe('*********** AUTH ***********', () => {
     it('it should POST verify', (done) => {
       chai
         .request(server)
-        .post('/verify')
+        .post('/api/v1/verify')
         .send({
           id: verification
         })
@@ -124,7 +128,7 @@ describe('*********** AUTH ***********', () => {
     it('it should POST forgot', (done) => {
       chai
         .request(server)
-        .post('/forgot')
+        .post('/api/v1/forgot')
         .send({
           email
         })
@@ -142,7 +146,7 @@ describe('*********** AUTH ***********', () => {
     it('it should POST reset', (done) => {
       chai
         .request(server)
-        .post('/reset')
+        .post('/api/v1/reset')
         .send({
           id: verificationForgot,
           password: '12345'
@@ -160,7 +164,7 @@ describe('*********** AUTH ***********', () => {
     it('it should NOT be able to consume the route since no token was sent', (done) => {
       chai
         .request(server)
-        .get('/token')
+        .get('/api/v1/token')
         .end((err, res) => {
           res.should.have.status(401)
           done()
@@ -169,7 +173,7 @@ describe('*********** AUTH ***********', () => {
     it('it should GET a fresh token', (done) => {
       chai
         .request(server)
-        .get('/token')
+        .get('/api/v1/token')
         .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
           res.should.have.status(200)

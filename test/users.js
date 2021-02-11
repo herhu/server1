@@ -36,7 +36,7 @@ describe('*********** USERS ***********', () => {
     it('it should GET token as admin', (done) => {
       chai
         .request(server)
-        .post('/login')
+        .post('/api/v1/login')
         .send(loginDetails.admin)
         .end((err, res) => {
           res.should.have.status(200)
@@ -49,7 +49,7 @@ describe('*********** USERS ***********', () => {
     it('it should GET token as user', (done) => {
       chai
         .request(server)
-        .post('/login')
+        .post('/api/v1/login')
         .send(loginDetails.user)
         .end((err, res) => {
           res.should.have.status(200)
@@ -64,7 +64,7 @@ describe('*********** USERS ***********', () => {
     it('it should NOT be able to consume the route since no token was sent', (done) => {
       chai
         .request(server)
-        .get('/users')
+        .get('/api/v1/users')
         .end((err, res) => {
           res.should.have.status(401)
           done()
@@ -73,7 +73,7 @@ describe('*********** USERS ***********', () => {
     it('it should GET all the users', (done) => {
       chai
         .request(server)
-        .get('/users')
+        .get('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .end((err, res) => {
           res.should.have.status(200)
@@ -85,7 +85,7 @@ describe('*********** USERS ***********', () => {
     it('it should GET the users with filters', (done) => {
       chai
         .request(server)
-        .get('/users?filter=admin&fields=name,email,city,country,phone')
+        .get('/api/v1/users?filter=admin&fields=name,email,city,country,phone')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .end((err, res) => {
           res.should.have.status(200)
@@ -102,7 +102,7 @@ describe('*********** USERS ***********', () => {
       const user = {}
       chai
         .request(server)
-        .post('/users')
+        .post('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -115,18 +115,15 @@ describe('*********** USERS ***********', () => {
     it('it should POST a user ', (done) => {
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email,
         password: faker.random.words(),
-        role: 'admin',
-        urlTwitter: faker.internet.url(),
-        urlGitHub: faker.internet.url(),
-        phone: faker.phone.phoneNumber(),
-        city: faker.random.words(),
-        country: faker.random.words()
+        role: 'admin'
       }
       chai
         .request(server)
-        .post('/users')
+        .post('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -140,13 +137,15 @@ describe('*********** USERS ***********', () => {
     it('it should NOT POST a user with email that already exists', (done) => {
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email,
         password: faker.random.words(),
         role: 'admin'
       }
       chai
         .request(server)
-        .post('/users')
+        .post('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -160,12 +159,14 @@ describe('*********** USERS ***********', () => {
       const user = {
         name: faker.random.words(),
         email,
+        username: faker.random.words(),
+        rut: faker.random.words(),
         password: faker.random.words(),
         role: faker.random.words()
       }
       chai
         .request(server)
-        .post('/users')
+        .post('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -181,7 +182,7 @@ describe('*********** USERS ***********', () => {
       const id = createdID.slice(-1).pop()
       chai
         .request(server)
-        .get(`/users/${id}`)
+        .get(`/api/v1/users/${id}`)
         .set('Authorization', `Bearer ${tokens.admin}`)
         .end((error, res) => {
           res.should.have.status(200)
@@ -199,15 +200,12 @@ describe('*********** USERS ***********', () => {
         name: 'JS123456',
         email: 'emailthatalreadyexists@email.com',
         role: 'admin',
-        urlTwitter: faker.internet.url(),
-        urlGitHub: faker.internet.url(),
-        phone: faker.phone.phoneNumber(),
-        city: faker.random.words(),
-        country: faker.random.words()
+        username: faker.random.words(),
+        rut: faker.random.words()
       }
       chai
         .request(server)
-        .patch(`/users/${id}`)
+        .patch(`/api/v1/users/${id}`)
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((error, res) => {
@@ -226,12 +224,14 @@ describe('*********** USERS ***********', () => {
       const id = createdID.slice(-1).pop()
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email: 'admin@admin.com',
         role: 'admin'
       }
       chai
         .request(server)
-        .patch(`/users/${id}`)
+        .patch(`/api/v1/users/${id}`)
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -245,12 +245,14 @@ describe('*********** USERS ***********', () => {
       const id = createdID.slice(-1).pop()
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email: 'toto@toto.com',
         role: 'user'
       }
       chai
         .request(server)
-        .patch(`/users/${id}`)
+        .patch(`/api/v1/users/${id}`)
         .set('Authorization', `Bearer ${tokens.user}`)
         .send(user)
         .end((err, res) => {
@@ -265,18 +267,15 @@ describe('*********** USERS ***********', () => {
     it('it should DELETE a user given the id', (done) => {
       const user = {
         name: faker.random.words(),
+        username: faker.random.words(),
+        rut: faker.random.words(),
         email: faker.internet.email(),
         password: faker.random.words(),
-        role: 'admin',
-        urlTwitter: faker.internet.url(),
-        urlGitHub: faker.internet.url(),
-        phone: faker.phone.phoneNumber(),
-        city: faker.random.words(),
-        country: faker.random.words()
+        role: 'admin'
       }
       chai
         .request(server)
-        .post('/users')
+        .post('/api/v1/users')
         .set('Authorization', `Bearer ${tokens.admin}`)
         .send(user)
         .end((err, res) => {
@@ -285,7 +284,7 @@ describe('*********** USERS ***********', () => {
           res.body.should.include.keys('_id', 'name', 'email', 'verification')
           chai
             .request(server)
-            .delete(`/users/${res.body._id}`)
+            .delete(`/api/v1/users/${res.body._id}`)
             .set('Authorization', `Bearer ${tokens.admin}`)
             .end((error, result) => {
               result.should.have.status(200)

@@ -16,7 +16,7 @@ const {
   getEmployee,
   updateEmployee,
   deleteEmployee
-} = require('../controllers/Employees')
+} = require('../controllers/employees')
 
 const {
   validateCreateEmployee,
@@ -44,7 +44,6 @@ router.get(
   trimRequest.all,
   getEmployees
 )
-
 /*
  * Create new item route
  */

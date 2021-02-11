@@ -10,7 +10,9 @@ const registerUser = (req = {}) => {
   return new Promise((resolve, reject) => {
     const user = new User({
       name: req.name,
+      username: req.username,
       email: req.email,
+      rut: req.rut,
       password: req.password,
       verification: uuid.v4()
     })

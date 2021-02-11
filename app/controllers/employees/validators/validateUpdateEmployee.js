@@ -4,7 +4,7 @@ const { check } = require('express-validator')
 /**
  * Validates update item request
  */
-const validateUpdateCompany = [
+const validateUpdateEmployee = [
   check('name')
     .exists()
     .withMessage('MISSING')
@@ -52,4 +52,4 @@ const validateUpdateCompany = [
   }
 ]
 
-module.exports = { validateUpdateCompany }
+module.exports = { validateUpdateEmployee }

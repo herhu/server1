@@ -9,11 +9,10 @@ const { buildErrObject } = require('../../../middleware/utils')
 const createItemInDb = ({
   name = '',
   email = '',
+  rut = '',
+  username = '',
   password = '',
-  role = '',
-  phone = '',
-  city = '',
-  country = ''
+  role = ''
 }) => {
   return new Promise((resolve, reject) => {
     const user = new User({
@@ -21,9 +20,8 @@ const createItemInDb = ({
       email,
       password,
       role,
-      phone,
-      city,
-      country,
+      rut,
+      username,
       verification: uuid.v4()
     })
     user.save((err, item) => {

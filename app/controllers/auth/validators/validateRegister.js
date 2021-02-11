@@ -11,6 +11,18 @@ const validateRegister = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('username')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('rut')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('email')
     .exists()
     .withMessage('MISSING')
