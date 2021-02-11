@@ -32,7 +32,6 @@
 *   MongoDB **3.6+**
 *   Redis **5.0+**
 
-
 ## How to install
 
 ### Install npm dependencies after installing (Git or manual download)
