@@ -24,7 +24,7 @@ fs.readdirSync(routesPath).filter((file) => {
 /*
  * Setup routes for index
  */
-router.get('/api/v1/', (req, res) => {
+router.get('/', (req, res) => {
   res.render('index')
 })
 

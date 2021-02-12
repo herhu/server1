@@ -1,0 +1,2441 @@
+{
+	"info": {
+		"_postman_id": "549b39bd-5232-4836-a4ee-ee3477b67040",
+		"name": "BeddoPMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "My Name",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "my@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/verify",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "b98b1dea-b3f4-4b72-bcdf-9d36607e2603",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/verify",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/forgot",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/forgot",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reset",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "f5b08991-02fc-4f3d-9a32-6d703bef5c57",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/reset",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//- auto populates token to environment variables",
+									"pm.test(\"Token returned from login, added to environment.\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"token\");",
+									"    const jsonData = pm.response.json();",
+									"    pm.globals.set('authToken', jsonData.token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "herhuglz@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/token",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/users?filter=ad&fields=name,email&page=1&limit=10&sort=name&order=-1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "ad"
+								},
+								{
+									"key": "fields",
+									"value": "name,email"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "New User",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "myemail@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "123123",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Bucaramamga",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Colombia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/users/5aab2443ef417d2d19e6c8f2",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"5aab2443ef417d2d19e6c8f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/users/5aa1c2c35ef7a4e97b5e995a",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"5aa1c2c35ef7a4e97b5e995a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "New Name",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "new@email.com",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Cali",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Colombia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/5aa1c2c35ef7a4e97b5e995a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"5aa1c2c35ef7a4e97b5e995a"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "/bookings/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookings/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookings?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "employeeName",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "employeeRut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sap",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "management",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bedNumber",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "checkIn",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "checkOut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Establishment",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bookingStatus",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bookings",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "es"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookings/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "employeeName",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "employeeRut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sap",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "management",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bedNumber",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "checkIn",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "checkOut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Establishment",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bookingStatus",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bookings/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookings/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/bookings/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookings",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "/employees/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/employees/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/employees?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "rut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sap",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "management",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "notes",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/employees",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "es"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/employees/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "rut",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "sap",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "management",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "notes",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/employees/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/employees/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/employees/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"employees",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "bed statuses",
+			"item": [
+				{
+					"name": "/bedStatuses/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bedStatuses/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bedStatuses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bedStatuses?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bedStatuses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bedStatuses",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bedStatuses/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "es"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bedStatuses/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bedStatuses/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bedStatuses/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bedStatuses/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/bedStatuses/5b38171b1843d58427c5d6c4?",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bedStatuses",
+								"5b38171b1843d58427c5d6c4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "booking statuses",
+			"item": [
+				{
+					"name": "/bookingStatuses/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookingStatuses/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookingStatuses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookingStatuses?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookingStatuses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "descInventory",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bookingStatuses",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookingStatuses/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "es"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/bookingStatuses/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookingStatuses/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "descInventory",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bookingStatuses/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bookingStatuses/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/bookingStatuses/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bookingStatuses",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "companies",
+			"item": [
+				{
+					"name": "/cities/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/cities/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/cities?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Miami",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/cities",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cities/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/cities/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cities/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Seatle2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/cities/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cities/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/cities/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"cities",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "establishments",
+			"item": [
+				{
+					"name": "/establishments/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/establishments/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/establishments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/establishments?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/establishments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "establishment",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "quantityBed",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numeration",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/establishments",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/establishments/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/establishments/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/establishments/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "establishment",
+									"value": "Miami",
+									"type": "text"
+								},
+								{
+									"key": "quantityBed",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "numeration",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/establishments/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/establishments/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/establishments/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"establishments",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "managements",
+			"item": [
+				{
+					"name": "/managements/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/managements/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/managements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/managements?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "Bucaramanga"
+								},
+								{
+									"key": "fields",
+									"value": "name"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/managements",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/managements?name",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/managements/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/managements/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements",
+								"5bd08db979bbc504c14ebfdd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/managements/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/managements/5bd08db979bbc504c14ebfdd",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements",
+								"5bd08db979bbc504c14ebfdd"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id ASC",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "where",
+									"value": "{ 'email' : { startsWith : 'f' } }",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/managements/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/managements/5b38171b1843d58427c5d6c4",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"managements",
+								"5b38171b1843d58427c5d6c4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "https://api-beddopms.pmsconsulting.cl/api/v1"
+		},
+		{
+			"key": "server_dev",
+			"value": "http://localhost:3030/api/v1"
+		}
+	]
+}

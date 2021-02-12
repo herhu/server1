@@ -24,6 +24,12 @@ const validateUpdateBookingStatus = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('id')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   (req, res, next) => {
     validateResult(req, res, next)
   }
