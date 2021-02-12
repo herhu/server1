@@ -38,7 +38,7 @@ describe('*********** AUTH ***********', () => {
     it('it should GET 404 url', (done) => {
       chai
         .request(server)
-        .get('/404url')
+        .get('/api/v1/404url')
         .end((err, res) => {
           res.should.have.status(404)
           res.body.should.be.an('object')
