@@ -3,15 +3,15 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const EstablishmentSchema = new mongoose.Schema(
   {
-    establishment: {
+    name: {
       type: String,
       required: true
     },
-    quantityBed: {
-      type: Number,
+    code: {
+      type: String,
       required: true
     },
-    numeration: {
+    distribution: {
       type: Array,
       required: true
     }

@@ -5,19 +5,19 @@ const { check } = require('express-validator')
  * Validates create new item request
  */
 const validateCreateEstablishment = [
-  check('establishment')
+  check('name')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('quantityBed')
+  check('code')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('numeration')
+  check('distribution')
     .exists()
     .withMessage('MISSING')
     .not()

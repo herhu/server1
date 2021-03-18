@@ -5,25 +5,19 @@ const { check } = require('express-validator')
  * Validates update item request
  */
 const validateUpdateEstablishment = [
-  check('establishment')
+  check('name')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('quantityBed')
+  check('code')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('numeration')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('id')
+  check('distribution')
     .exists()
     .withMessage('MISSING')
     .not()
