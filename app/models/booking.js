@@ -3,33 +3,33 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const BookingSchema = new mongoose.Schema(
   {
-    code: {
+    bookingCode: {
       type: String,
       required: true
     },
     employeeName: {
       type: String,
-      required: true
+      required: false
     },
     employeeRut: {
       type: Number,
       default: 0,
-      required: true
+      required: false
     },
     sap: {
       type: Number,
-      required: true
+      required: false
     },
     management: {
       type: String,
-      required: true
+      required: false
     },
     company: {
       type: String,
       required: true
     },
-    bedNumber: {
-      type: String,
+    reservation: {
+      type: Array,
       required: true
     },
     checkIn: {
@@ -50,7 +50,7 @@ const BookingSchema = new mongoose.Schema(
     },
     Notes: {
       type: String,
-      required: true
+      required: false
     }
   },
   {

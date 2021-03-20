@@ -5,7 +5,7 @@ const { check } = require('express-validator')
  * Validates update item request
  */
 const validateUpdateBooking = [
-  check('code')
+  check('bookingCode')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -41,7 +41,7 @@ const validateUpdateBooking = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('bedNumber')
+  check('reservation')
     .exists()
     .withMessage('MISSING')
     .not()

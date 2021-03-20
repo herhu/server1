@@ -5,31 +5,7 @@ const { check } = require('express-validator')
  * Validates create new item request
  */
 const validateCreateBooking = [
-  check('code')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('employeeName')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('employeeRut')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('sap')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('management')
+  check('bookingCode')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -41,7 +17,7 @@ const validateCreateBooking = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('bedNumber')
+  check('reservation')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -66,12 +42,6 @@ const validateCreateBooking = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('bookingStatus')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('Notes')
     .exists()
     .withMessage('MISSING')
     .not()
