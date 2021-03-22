@@ -35,7 +35,7 @@ const validateCreateBooking = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('Establishment')
+  check('establishment')
     .exists()
     .withMessage('MISSING')
     .not()

@@ -11,7 +11,9 @@ module.exports = () => {
       {
         keepAlive: true,
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
       },
       (err) => {
         let dbStatus = ''
@@ -30,8 +32,6 @@ module.exports = () => {
         }
       }
     )
-    mongoose.set('useCreateIndex', true)
-    mongoose.set('useFindAndModify', false)
   }
   connect()
 

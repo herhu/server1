@@ -7,19 +7,6 @@ const BookingSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    employeeName: {
-      type: String,
-      required: false
-    },
-    employeeRut: {
-      type: Number,
-      default: 0,
-      required: false
-    },
-    sap: {
-      type: Number,
-      required: false
-    },
     management: {
       type: String,
       required: false
@@ -32,6 +19,16 @@ const BookingSchema = new mongoose.Schema(
       type: Array,
       required: true
     },
+    active: {
+      type: Array,
+      default: [],
+      required: false
+    },
+    inactive: {
+      type: Array,
+      default: [],
+      required: false
+    },
     checkIn: {
       type: Date,
       required: true
@@ -40,17 +37,13 @@ const BookingSchema = new mongoose.Schema(
       type: Date,
       required: true
     },
-    Establishment: {
+    establishment: {
       type: String,
       required: true
     },
     bookingStatus: {
       type: String,
       required: true
-    },
-    Notes: {
-      type: String,
-      required: false
     }
   },
   {

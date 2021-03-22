@@ -3,13 +3,23 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const compression = require('compression')
+const http = require('http')
 const helmet = require('helmet')
 const cors = require('cors')
 const passport = require('passport')
-const app = express()
+
 const i18n = require('i18n')
 const initMongo = require('./config/mongo')
 const path = require('path')
+
+const app = express()
+const server = http.Server(app)
+const io = require('socket.io')(server, {
+  origins: ['http://localhost:3000']
+})
+
+// // sockets
+require('./socket')(io)
 
 // Setup express server port from ENV, default: 9000
 app.set('port', process.env.PORT || 9000)
@@ -68,7 +78,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 app.use(require('./app/routes'))
-app.listen(app.get('port'))
+server.listen(app.get('port'))
 
 // Init MongoDB
 initMongo()
