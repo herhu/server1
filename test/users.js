@@ -12,7 +12,7 @@ const should = chai.should()
 const loginDetails = {
   admin: {
     id: '5aa1c2c35ef7a4e97b5e995a',
-    email: 'admin@admin.com',
+    email: 'sudo@sudo.com',
     password: '12345'
   },
   user: {
