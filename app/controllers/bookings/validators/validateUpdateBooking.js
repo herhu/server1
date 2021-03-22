@@ -23,18 +23,8 @@ const validateUpdateBooking = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('active')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('inactive')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
+  check('active').exists().withMessage('MISSING').not(),
+  check('inactive').exists().withMessage('MISSING').not(),
   check('establishment')
     .exists()
     .withMessage('MISSING')

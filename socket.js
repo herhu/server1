@@ -27,9 +27,7 @@ module.exports = (io) => {
     // Get the latency
     socket.on('ping', () => socket.emit('pong'))
 
-    socket.on('checkIn', (data) => {
-      // const status = updateItem(data.id, Booking, data)
-      console.log(data)
+    socket.on('checkIn', () => {
       getAllBookings()
     })
   })
