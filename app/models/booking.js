@@ -40,10 +40,6 @@ const BookingSchema = new mongoose.Schema(
     establishment: {
       type: String,
       required: true
-    },
-    bookingStatus: {
-      type: String,
-      required: true
     }
   },
   {

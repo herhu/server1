@@ -24,6 +24,22 @@ const EmployeeSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    gender: {
+      type: String,
+      required: true
+    },
+    workingDay: {
+      type: String,
+      required: true
+    },
+    miningGroup: {
+      type: String,
+      required: true
+    },
+    mail: {
+      type: String,
+      required: true
+    },
     notes: {
       type: String,
       required: true

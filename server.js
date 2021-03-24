@@ -15,7 +15,10 @@ const path = require('path')
 const app = express()
 const server = http.Server(app)
 const io = require('socket.io')(server, {
-  origins: ['http://localhost:3000']
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
 })
 
 // // sockets

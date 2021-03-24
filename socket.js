@@ -28,6 +28,7 @@ module.exports = (io) => {
     socket.on('ping', () => socket.emit('pong'))
 
     socket.on('checkIn', () => {
+      console.log('is Checking')
       getAllBookings()
     })
   })
