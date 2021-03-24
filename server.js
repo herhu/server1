@@ -16,7 +16,7 @@ const app = express()
 const server = http.Server(app)
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://beddopms.pmsconsulting.cl'],
     methods: ['GET', 'POST']
   }
 })
