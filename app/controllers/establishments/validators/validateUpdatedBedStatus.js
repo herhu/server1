@@ -4,8 +4,20 @@ const { check } = require('express-validator')
 /**
  * Validates update item request
  */
-const validateUpdateEstablishment = [
-  check('name')
+const validateUpdatedBedStatus = [
+  check('floor')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('room')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('bed')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -17,16 +29,15 @@ const validateUpdateEstablishment = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('distribution')
+  check('status')
     .exists()
     .withMessage('MISSING')
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
   (req, res, next) => {
-    console.log('what?melon')
     validateResult(req, res, next)
   }
 ]
 
-module.exports = { validateUpdateEstablishment }
+module.exports = { validateUpdatedBedStatus }

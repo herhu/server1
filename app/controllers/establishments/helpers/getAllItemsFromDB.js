@@ -4,7 +4,7 @@ const { buildErrObject } = require('../../../middleware/utils')
 /**
  * Gets all items from database
  */
-const getAllItemsFromDB = () => {
+const getAllEstablishmentsFromDB = () => {
   return new Promise((resolve, reject) => {
     Establishment.find(
       {},
@@ -24,4 +24,4 @@ const getAllItemsFromDB = () => {
   })
 }
 
-module.exports = { getAllItemsFromDB }
+module.exports = { getAllEstablishmentsFromDB }

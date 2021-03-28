@@ -4,6 +4,7 @@ const { getAllEstablishments } = require('./getAllEstablishments')
 const { getEstablishment } = require('./getEstablishment')
 const { getEstablishments } = require('./getEstablishments')
 const { updateEstablishment } = require('./updateEstablishment')
+const { updateBedStatus } = require('./updateBedStatus')
 
 module.exports = {
   createEstablishment,
@@ -11,5 +12,6 @@ module.exports = {
   getAllEstablishments,
   getEstablishment,
   getEstablishments,
-  updateEstablishment
+  updateEstablishment,
+  updateBedStatus
 }

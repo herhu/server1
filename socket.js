@@ -1,6 +1,7 @@
-// const Booking = require('./app/models/booking')
 const { getAllItemsFromDB } = require('./app/controllers/bookings/helpers')
-// const { updateItem } = require('./app/middleware/db')
+const {
+  getAllEstablishmentsFromDB
+} = require('./app/controllers/establishments/helpers/getAllItemsFromDB')
 module.exports = (io) => {
   const connections = []
 
@@ -8,6 +9,15 @@ module.exports = (io) => {
     try {
       const data = await getAllItemsFromDB()
       io.emit('currentsBeds', data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getAllEstablishments = async () => {
+    try {
+      const data = await getAllEstablishmentsFromDB()
+      io.emit('currentsEstablishments', data)
     } catch (error) {
       console.log(error)
     }
@@ -30,6 +40,11 @@ module.exports = (io) => {
     socket.on('checkIn', () => {
       console.log('is Checking')
       getAllBookings()
+    })
+
+    socket.on('bedUpdated', () => {
+      console.log('bed updated')
+      getAllEstablishments()
     })
   })
 }

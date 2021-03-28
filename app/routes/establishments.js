@@ -15,14 +15,16 @@ const {
   createEstablishment,
   getEstablishment,
   updateEstablishment,
-  deleteEstablishment
+  deleteEstablishment,
+  updateBedStatus
 } = require('../controllers/establishments')
 
 const {
   validateCreateEstablishment,
   validateGetEstablishment,
   validateUpdateEstablishment,
-  validateDeleteEstablishment
+  validateDeleteEstablishment,
+  validateUpdatedBedStatus
 } = require('../controllers/establishments/validators')
 
 /*
@@ -67,6 +69,17 @@ router.get(
   trimRequest.all,
   validateGetEstablishment,
   getEstablishment
+)
+/*
+ * Update bed status route
+ */
+router.patch(
+  '/updateBedStatus',
+  requireAuth,
+  roleAuthorization(['admin']),
+  trimRequest.all,
+  validateUpdatedBedStatus,
+  updateBedStatus
 )
 
 /*
