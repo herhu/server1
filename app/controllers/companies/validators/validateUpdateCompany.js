@@ -11,6 +11,18 @@ const validateUpdateCompany = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('management')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('limit')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('id')
     .exists()
     .withMessage('MISSING')

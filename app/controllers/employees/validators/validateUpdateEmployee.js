@@ -17,7 +17,19 @@ const validateUpdateEmployee = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
+  check('mail')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   check('sap')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('gender')
     .exists()
     .withMessage('MISSING')
     .not()
@@ -30,6 +42,24 @@ const validateUpdateEmployee = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('company')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('workingDay')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('miningGroup')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('rol')
     .exists()
     .withMessage('MISSING')
     .not()

@@ -12,6 +12,18 @@ const validateCreateCompany = [
     .isEmpty()
     .withMessage('IS_EMPTY')
     .trim(),
+  check('management')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
+  check('limit')
+    .exists()
+    .withMessage('MISSING')
+    .not()
+    .isEmpty()
+    .withMessage('IS_EMPTY'),
   (req, res, next) => {
     validateResult(req, res, next)
   }

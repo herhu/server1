@@ -6,6 +6,14 @@ const CompanySchema = new mongoose.Schema(
     name: {
       type: String,
       required: true
+    },
+    management: {
+      type: String,
+      required: true
+    },
+    limit: {
+      type: Number,
+      required: true
     }
   },
   {

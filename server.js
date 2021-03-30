@@ -7,7 +7,7 @@ const http = require('http')
 const helmet = require('helmet')
 const cors = require('cors')
 const passport = require('passport')
-
+const expressStatusMonitor = require('express-status-monitor')
 const i18n = require('i18n')
 const initMongo = require('./config/mongo')
 const path = require('path')
@@ -17,7 +17,7 @@ const server = http.Server(app)
 const io = require('socket.io')(server, {
   cors: {
     origin: ['http://localhost:3000', 'https://beddopms.pmsconsulting.cl'],
-    methods: ['GET', 'POST']
+    methods: ['GET', 'POST', 'PATCH']
   }
 })
 
@@ -70,6 +70,13 @@ i18n.configure({
   objectNotation: true
 })
 app.use(i18n.init)
+
+app.use(
+  expressStatusMonitor({
+    websocket: io,
+    port: app.get('port')
+  })
+)
 
 // Init all other stuff
 app.use(cors())
