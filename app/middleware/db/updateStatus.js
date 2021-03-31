@@ -13,11 +13,11 @@ const updateStatus = (model = {}, req = {}) => {
       }, // update
       {
         arrayFilters: [
-          { 'f.floor': req.floor === 'PB' ? req.floor : parseInt(req.floor) },
+          { 'f.floor': req.floor },
           {
-            'r.number': parseInt(req.room)
+            'r.number': req.room
           },
-          { 'b.number': req.bed === 'sin/cama' ? req.bed : parseInt(req.bed) }
+          { 'b.number': req.bed }
         ],
         new: true
       },
