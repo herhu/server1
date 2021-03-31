@@ -23,12 +23,6 @@ const validateCreateEmployee = [
     .not()
     .isEmpty()
     .withMessage('IS_EMPTY'),
-  check('sap')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
   check('gender')
     .exists()
     .withMessage('MISSING')
@@ -60,12 +54,6 @@ const validateCreateEmployee = [
     .isEmpty()
     .withMessage('IS_EMPTY'),
   check('rol')
-    .exists()
-    .withMessage('MISSING')
-    .not()
-    .isEmpty()
-    .withMessage('IS_EMPTY'),
-  check('notes')
     .exists()
     .withMessage('MISSING')
     .not()

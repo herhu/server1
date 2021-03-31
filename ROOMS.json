@@ -3,104 +3,69 @@
   "code": "SURSUR",
   "distribution": [
     {
-      "floor": 3,
+      "floor": "garder",
       "rooms": [
         {
-          "number": 301,
+          "number": "A1",
           "beds": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "floor": "garder",
+      "rooms": [
         {
-          "number": 302,
+          "number": "A1",
           "beds": [
-            7,
-            8,
-            9,
-            10
-          ]
-        },
-        {
-          "number": 303,
-          "beds": [
-            11,
-            12,
-            13,
-            14
-          ]
-        },
-        {
-          "number": 304,
-          "beds": [
-            15,
-            16,
-            17,
-            18
-          ]
-        },
-        {
-          "number": 305,
-          "beds": [
-            19,
-            20,
-            21,
-            22
-          ]
-        },
-        {
-          "number": 306,
-          "beds": [
-            23,
-            24,
-            25,
-            26
-          ]
-        },
-        {
-          "number": 307,
-          "beds": [
-            27,
-            28,
-            29,
-            30
-          ]
-        },
-        {
-          "number": 308,
-          "beds": [
-            31,
-            32,
-            33,
-            34
-          ]
-        },
-        {
-          "number": 309,
-          "beds": [
-            35,
-            36,
-            37
-          ]
-        },
-        {
-          "number": 310,
-          "beds": [
-            38,
-            39,
-            40,
-            41
-          ]
-        },
-        {
-          "number": 311,
-          "beds": [
-            42,
-            43
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            },
+            {
+              "number": 1,
+              "status": "Vacante Sucia"
+            }
           ]
         }
       ]
@@ -114,40 +79,8 @@
             44,
             45
           ]
-        },
-        {
-          "number": 413,
-          "beds": [
-            46,
-            47,
-            48
-          ]
-        },
-        {
-          "number": 414,
-          "beds": [
-            49,
-            50,
-            51
-          ]
-        },
-        {
-          "number": 415,
-          "beds": [
-            52,
-            53,
-            54
-          ]
-        },
-        {
-          "number": 416,
-          "beds": [
-            55,
-            56
-          ]
         }
       ]
     }
-
   ]
 }

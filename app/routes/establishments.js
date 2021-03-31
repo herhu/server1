@@ -76,7 +76,7 @@ router.get(
 router.patch(
   '/updateBedStatus',
   requireAuth,
-  roleAuthorization(['admin']),
+  roleAuthorization(['admin', 'hsk']),
   trimRequest.all,
   validateUpdatedBedStatus,
   updateBedStatus

@@ -14,7 +14,7 @@ const EmployeeSchema = new mongoose.Schema(
     sap: {
       type: Number,
       default: 0,
-      required: true
+      required: false
     },
     management: {
       type: String,
@@ -46,7 +46,7 @@ const EmployeeSchema = new mongoose.Schema(
     },
     notes: {
       type: String,
-      required: true
+      required: false
     }
   },
   {
